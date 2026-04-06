@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="오늘집중 아이콘">
+  <rect width="64" height="64" rx="18" fill="#2c6e62" />
+  <rect x="16" y="14" width="32" height="36" rx="10" fill="#f8f0e4" />
+  <path d="M22 24h20" stroke="#d0b893" stroke-linecap="round" stroke-width="4" />
+  <path d="M22 32h12" stroke="#d0b893" stroke-linecap="round" stroke-width="4" />
+  <path d="M24 40l5 5 11-13" fill="none" stroke="#2c6e62" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" />
+</svg>
