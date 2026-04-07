@@ -784,12 +784,59 @@ textarea:focus {
 }
 
 @media (max-width: 900px) {
+  :root {
+    font-size: 14px;
+  }
+
+  .app-shell {
+    padding: 16px 12px 32px;
+  }
+
+  .hero-panel {
+    padding: 20px 16px;
+    margin-bottom: 16px;
+  }
+
+  .hero-title {
+    font-size: 1.4rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.9rem;
+  }
+
   .composer-grid {
     grid-template-columns: 1fr;
   }
 
-  .app-shell {
-    padding: 20px 16px 40px;
+  .composer-input {
+    font-size: 0.95rem;
+    padding: 10px 12px;
+  }
+
+  .composer-add-btn {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+
+  .option-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .option-label {
+    font-size: 0.85rem;
+    min-width: auto;
+  }
+
+  .option-chips {
+    flex-wrap: wrap;
+  }
+
+  .option-chip {
+    padding: 6px 10px;
+    font-size: 0.8rem;
   }
 
   .hero-body {
@@ -801,17 +848,49 @@ textarea:focus {
     min-width: 0;
   }
 
-  .task-card,
-  .task-card-main,
-  .replace-row {
-    align-items: stretch;
-    flex-direction: column;
+  .task-card {
+    padding: 12px 14px;
+    border-radius: 10px;
   }
 
-  .task-card-status,
+  .task-card-main {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .task-card-status {
+    order: 1;
+    width: auto;
+    min-width: auto;
+  }
+
+  .task-card-copy {
+    order: 2;
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+
+  .task-card-copy strong {
+    font-size: 0.95rem;
+  }
+
   .task-card-side {
-    width: 100%;
-    justify-items: start;
+    order: 3;
+    width: auto;
+    margin-left: auto;
+  }
+
+  .task-date {
+    font-size: 0.8rem;
+  }
+
+  .importance-dot-small {
+    width: 8px;
+    height: 8px;
+  }
+
+  .panel-divider {
+    margin: 12px 0;
   }
 
   .overlay {
@@ -822,16 +901,43 @@ textarea:focus {
     width: 100%;
     height: 100vh;
     border-radius: 0;
+    padding: 16px;
+  }
+
+  .panel-title-row {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .panel-title-row h2 {
+    font-size: 1.1rem;
+  }
+
+  .detail-grid {
+    gap: 12px;
+  }
+
+  .detail-grid label {
+    font-size: 0.85rem;
+  }
+
+  .detail-grid input,
+  .detail-grid select,
+  .detail-grid textarea {
+    font-size: 0.9rem;
+    padding: 8px 10px;
+  }
+
+  .detail-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .detail-actions button {
+    width: 100%;
+    padding: 12px;
   }
 }
-
-.importance-indicator {
-  margin-left: 6px;
-  font-size: 0.75rem;
-}
-.importance-indicator--low { color: #a3a3a3; }
-.importance-indicator--medium { color: #262626; }
-.importance-indicator--high { color: #262626; font-weight: bold; }
 
 .importance-dot-small {
   display: inline-block;
