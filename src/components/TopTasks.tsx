@@ -32,7 +32,7 @@ export const TopTasks = ({
               />
             </div>
             <div className="task-card-copy" onClick={() => onOpenDetail(task.id)} role="button" tabIndex={0}>
-              <strong><span className={`importance-indicator importance-indicator--${task.importance}`}>{task.importance === "low" ? "○" : task.importance === "medium" ? "◑" : "●"}</span> {task.title}</strong>
+              <strong><span className={`importance-dot-small importance-dot-small--${task.importance}`}></span> {task.title}</strong>
               {task.memo ? <p className="task-meta">{task.memo}</p> : null}
             </div>
             <div className="task-card-side" onClick={() => onOpenDetail(task.id)} role="button" tabIndex={0}>

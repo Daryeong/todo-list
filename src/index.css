@@ -822,6 +822,18 @@ textarea:focus {
   margin-left: 6px;
   font-size: 0.75rem;
 }
-.importance-indicator--low { color: #a3a3a3; }
-.importance-indicator--medium { color: #262626; }
-.importance-indicator--high { color: #262626; font-weight: bold; }
+.importance-indicator--low { color: #c0bfb9; }
+.importance-indicator--medium { color: #f59e0b; }
+.importance-indicator--high { color: #ef4444; font-weight: bold; }
+
+.importance-dot-small {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+.importance-dot-small--low { background: #c0bfb9; }
+.importance-dot-small--medium { background: #f59e0b; }
+.importance-dot-small--high { background: #ef4444; }
