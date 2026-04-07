@@ -148,7 +148,7 @@ export const TaskComposer = ({ onSubmit, defaultDate }: { onSubmit: (input: Task
         <div className="composer-options">
           <div className="option-section option-section--stacked">
             <div className="option-row">
-              <span className="option-label">시작</span>
+              <span className="option-label">시작일</span>
               <div className="option-chips">
                 <button
                   type="button"
@@ -283,7 +283,7 @@ export const TaskComposer = ({ onSubmit, defaultDate }: { onSubmit: (input: Task
           </div>
           <div className="option-section option-section--stacked">
             <div className="option-row">
-              <span className="option-label">마감</span>
+              <span className="option-label">마감일</span>
               <div className="option-chips">
                 <button
                   type="button"
