@@ -196,7 +196,7 @@ export const TaskComposer = ({ onSubmit, defaultDate }: { onSubmit: (input: Task
                       <path d="M4.5 1.8v2.4M9.5 1.8v2.4M2 5.2h10" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
                     </svg>
                   </span>
-                  <span className="date-chip-text">{dateTarget === 'start' && isCustomDate || startDateMode === 'custom' || startDateMode === 'week' ? formatShortKoreanDate(startDate) : '날짜 선택'}</span>
+                  <span className="date-chip-text">{startDate ? formatShortKoreanDate(startDate) : '날짜 선택'}</span>
                 </button>
               </div>
             </div>
@@ -321,7 +321,7 @@ export const TaskComposer = ({ onSubmit, defaultDate }: { onSubmit: (input: Task
                   일주일</button>
                 <button
                   type="button"
-                  aria-label={dateTarget === 'due' && isCustomDate || dueDateMode === 'custom' || dueDateMode === 'week' ? formatShortKoreanDate(dueDate) : '날짜 선택'}
+                  aria-label={dueDate ? formatShortKoreanDate(dueDate) : '날짜 선택'}
                   className={`option-chip option-chip--date ${dateTarget === 'due' && isCustomDate ? 'option-chip--active' : dueDateMode === 'custom' ? 'option-chip--active' : ''}`}
                   onClick={() => openDatePickerFor('due')}
                 >
