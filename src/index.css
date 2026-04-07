@@ -533,7 +533,6 @@ button {
 }
 
 .importance-dot {
-.importance-dot {
   display: inline-block;
   width: 10px;
   height: 10px;
@@ -541,10 +540,14 @@ button {
   margin-right: 4px;
 }
 
-.importance-dot--low { color: #c0bfb9; }
 .importance-dot--low { background: #a3a3a3; }
-.importance-dot--medium { background: linear-gradient(90deg, #a3a3a3 50%, transparent 50%); border: 1px solid #a3a3a3; box-sizing: border-box; }
+.importance-dot--medium { 
+  background: linear-gradient(90deg, #a3a3a3 50%, transparent 50%);
+  border: 1px solid #a3a3a3;
+  box-sizing: border-box;
+}
 .importance-dot--high { background: #262626; }
+
 input,
 select,
 textarea {
@@ -826,9 +829,9 @@ textarea:focus {
   margin-left: 6px;
   font-size: 0.75rem;
 }
-.importance-indicator--low { color: #c0bfb9; }
-.importance-indicator--medium { color: #f59e0b; }
-.importance-indicator--high { color: #ef4444; font-weight: bold; }
+.importance-indicator--low { color: #a3a3a3; }
+.importance-indicator--medium { color: #262626; }
+.importance-indicator--high { color: #262626; font-weight: bold; }
 
 .importance-dot-small {
   display: inline-block;
@@ -839,5 +842,9 @@ textarea:focus {
   vertical-align: middle;
 }
 .importance-dot-small--low { background: #a3a3a3; }
-.importance-dot-small--medium { background: linear-gradient(90deg, #a3a3a3 50%, transparent 50%); border: 1px solid #a3a3a3; }
+.importance-dot-small--medium { 
+  background: linear-gradient(90deg, #a3a3a3 50%, transparent 50%);
+  border: 1px solid #a3a3a3;
+  box-sizing: border-box;
+}
 .importance-dot-small--high { background: #262626; }
