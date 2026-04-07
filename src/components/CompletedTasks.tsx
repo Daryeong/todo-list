@@ -15,9 +15,10 @@ export const CompletedTasks = ({ tasks, onDelete }: { tasks: Task[]; onDelete: (
         <article className="task-card task-card--completed" key={task.id}>
           <div className="task-card-main">
             <div className="task-card-status">
-              <span className="completed-mark" aria-hidden="true">
-                완료
-              </span>
+              <span className="completed-mark" aria-hidden="true">완료</span>
+            </div>
+            <div className="task-card-importance">
+              <span className={`importance-dot-small importance-dot-small--${task.importance}`}></span>
             </div>
             <div className="task-card-copy">
               <strong className="completed-title">{task.title}</strong>
