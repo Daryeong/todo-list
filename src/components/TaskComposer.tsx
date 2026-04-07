@@ -47,8 +47,8 @@ const buildMonthCells = (value: string) => {
 export const TaskComposer = ({ onSubmit, defaultDate }: { onSubmit: (input: TaskInput) => void; defaultDate: string }) => {
   const composerRef = useRef<HTMLDivElement | null>(null)
   const [title, setTitle] = useState('')
-  const [dueDate, setDueDate] = useState(defaultDate)
-  const [startDate, setStartDate] = useState(defaultDate)
+  const [dueDate, setDueDate] = useState('')
+  const [startDate, setStartDate] = useState('')
   const [importance, setImportance] = useState<Importance>('medium')
   const [showOptions, setShowOptions] = useState(false)
   const [showDatePicker, setShowDatePicker] = useState(false)
