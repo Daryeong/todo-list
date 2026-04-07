@@ -7,6 +7,7 @@ import { getTaskStatuses } from './statuses'
 const baseTask: Task = {
   id: 'task-1',
   title: '운동하기',
+  startDate: '2026-04-05',
   dueDate: '2026-04-06',
   importance: 'medium',
   memo: '',

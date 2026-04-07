@@ -41,6 +41,7 @@ describe('App', () => {
     expect(screen.getByText('늦은 일')).toBeInTheDocument()
     expect(screen.getByText('오늘 일')).toBeInTheDocument()
     expect(screen.getByText('중요한 일')).toBeInTheDocument()
+    expect(screen.getByRole('checkbox', { name: '늦은 일 완료' })).toHaveClass('task-check')
   })
 
   it('edits task details and marks a task complete', async () => {
@@ -97,5 +98,6 @@ describe('App', () => {
     expect(screen.getByText('오늘 완료한 일')).toBeInTheDocument()
     expect(screen.getByText('오늘 마무리')).toBeInTheDocument()
     expect(screen.getByText('오늘 1개 완료')).toBeInTheDocument()
+    expect(screen.queryByRole('checkbox', { name: '오늘 마무리 완료' })).not.toBeInTheDocument()
   })
 })

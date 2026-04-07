@@ -20,6 +20,18 @@ describe('TaskComposer', () => {
     expect(screen.getByRole('button', { name: '4. 18.' })).toBeInTheDocument()
   })
 
+  it('shows date and importance sections in start-due-importance order', async () => {
+    const user = userEvent.setup()
+    const onSubmit = vi.fn()
+
+    render(<TaskComposer defaultDate="2026-04-06" onSubmit={onSubmit} />)
+
+    await user.click(screen.getByPlaceholderText('할 일 추가...'))
+
+    const labels = screen.getAllByText(/시작|마감|중요도/).map((node) => node.textContent)
+    expect(labels).toEqual(['시작', '마감', '중요도'])
+  })
+
   it('moves to another month in the custom calendar', async () => {
     const user = userEvent.setup()
     const onSubmit = vi.fn()
@@ -69,5 +81,25 @@ describe('TaskComposer', () => {
 
     expect(screen.getByRole('button', { name: '2026년 선택' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: '11월 선택' })).toBeInTheDocument()
+  })
+
+  it('closes the calendar when clicking outside', async () => {
+    const user = userEvent.setup()
+    const onSubmit = vi.fn()
+
+    render(
+      <div>
+        <button type="button">바깥</button>
+        <TaskComposer defaultDate="2026-04-06" onSubmit={onSubmit} />
+      </div>,
+    )
+
+    await user.click(screen.getByPlaceholderText('할 일 추가...'))
+    await user.click(screen.getByRole('button', { name: '날짜 선택' }))
+    expect(screen.getByRole('dialog', { name: '날짜 선택 달력' })).toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: '바깥' }))
+
+    expect(screen.queryByRole('dialog', { name: '날짜 선택 달력' })).not.toBeInTheDocument()
   })
 })

@@ -15,7 +15,9 @@ export const CompletedTasks = ({ tasks }: { tasks: Task[] }) => (
         <article className="task-card task-card--completed" key={task.id}>
           <div className="task-card-main">
             <div className="task-card-status">
-              <input aria-label={`${task.title} 완료`} checked readOnly type="checkbox" />
+              <span className="completed-mark" aria-hidden="true">
+                완료
+              </span>
             </div>
             <div className="task-card-copy">
               <strong className="completed-title">{task.title}</strong>

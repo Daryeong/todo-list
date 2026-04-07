@@ -22,14 +22,16 @@ export const TaskDetailPanel = ({
 
   const handleSave = () => {
     const nextTitle = draft.title.trim()
+    const nextStartDate = draft.startDate.trim()
     const nextDueDate = draft.dueDate.trim()
 
-    if (!nextTitle || !nextDueDate) {
+    if (!nextTitle || !nextStartDate || !nextDueDate) {
       return
     }
 
     onSave(task.id, {
       title: nextTitle,
+      startDate: nextStartDate,
       dueDate: nextDueDate,
       importance: draft.importance,
       memo: draft.memo,
@@ -52,6 +54,10 @@ export const TaskDetailPanel = ({
           <label>
             <span>제목</span>
             <input value={draft.title} onChange={(event) => setDraft({ ...draft, title: event.target.value })} />
+          </label>
+          <label>
+            <span>시작일</span>
+            <input type="date" value={draft.startDate} onChange={(event) => setDraft({ ...draft, startDate: event.target.value })} />
           </label>
           <label>
             <span>마감일</span>

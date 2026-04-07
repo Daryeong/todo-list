@@ -5,6 +5,7 @@ export type ManualStatuses = Partial<Record<'today' | 'late' | 'flexible', boole
 export interface Task {
   id: string
   title: string
+  startDate: string
   dueDate: string
   importance: Importance
   memo: string
@@ -16,6 +17,7 @@ export interface Task {
 
 export interface TaskInput {
   title: string
+  startDate: string
   dueDate: string
   importance: Importance
 }
@@ -23,6 +25,7 @@ export interface TaskInput {
 export const createTask = (input: TaskInput, now: string) => ({
   id: crypto.randomUUID(),
   title: input.title.trim(),
+  startDate: input.startDate,
   dueDate: input.dueDate,
   importance: input.importance,
   memo: '',

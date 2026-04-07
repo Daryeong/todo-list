@@ -25,6 +25,7 @@ export const TopTasks = ({
             <div className="task-card-status">
               <input
                 aria-label={`${task.title} 완료`}
+                className="task-check"
                 checked={Boolean(task.completedAt)}
                 onChange={() => onComplete(task.id)}
                 type="checkbox"

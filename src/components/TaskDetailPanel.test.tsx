@@ -8,6 +8,7 @@ import { TaskDetailPanel } from './TaskDetailPanel'
 const createTask = (overrides: Partial<Task> = {}): Task => ({
   id: 'task-1',
   title: '초안 정리',
+  startDate: '2026-04-05',
   dueDate: '2026-04-06',
   importance: 'medium',
   memo: '',
@@ -71,8 +72,22 @@ describe('TaskDetailPanel', () => {
 
     expect(onSave).toHaveBeenCalledWith(
       'task-1',
-      expect.objectContaining({ title: '다듬은 제목', dueDate: '2026-04-08' }),
+      expect.objectContaining({ title: '다듬은 제목', dueDate: '2026-04-08', startDate: '2026-04-05' }),
     )
     expect(onClose).toHaveBeenCalled()
+  })
+
+  it('saves edited start date', async () => {
+    const user = userEvent.setup()
+    const onSave = vi.fn()
+
+    render(<TaskDetailPanel task={createTask()} onClose={vi.fn()} onMoveToTomorrow={vi.fn()} onSave={onSave} />)
+
+    const startDateInput = screen.getByLabelText('시작일')
+    await user.clear(startDateInput)
+    await user.type(startDateInput, '2026-04-07')
+    await user.click(screen.getByRole('button', { name: '저장' }))
+
+    expect(onSave).toHaveBeenCalledWith('task-1', expect.objectContaining({ startDate: '2026-04-07' }))
   })
 })

@@ -12,10 +12,10 @@ describe('useTodoApp', () => {
     const { result } = renderHook(() => useTodoApp('2026-04-06'))
 
     act(() => {
-      result.current.addTask({ title: '늦은 일', dueDate: '2026-04-05', importance: 'medium' })
-      result.current.addTask({ title: '오늘 일', dueDate: '2026-04-06', importance: 'medium' })
-      result.current.addTask({ title: '중요한 일', dueDate: '2026-04-08', importance: 'high' })
-      result.current.addTask({ title: '여유 일', dueDate: '2026-04-20', importance: 'low' })
+      result.current.addTask({ title: '늦은 일', startDate: '2026-04-04', dueDate: '2026-04-05', importance: 'medium' })
+      result.current.addTask({ title: '오늘 일', startDate: '2026-04-06', dueDate: '2026-04-06', importance: 'medium' })
+      result.current.addTask({ title: '중요한 일', startDate: '2026-04-07', dueDate: '2026-04-08', importance: 'high' })
+      result.current.addTask({ title: '여유 일', startDate: '2026-04-10', dueDate: '2026-04-20', importance: 'low' })
     })
 
     expect(result.current.openTasks).toHaveLength(4)
@@ -26,7 +26,7 @@ describe('useTodoApp', () => {
     const { result } = renderHook(() => useTodoApp('2026-04-06'))
 
     act(() => {
-      result.current.addTask({ title: '완료할 일', dueDate: '2026-04-06', importance: 'medium' })
+      result.current.addTask({ title: '완료할 일', startDate: '2026-04-06', dueDate: '2026-04-06', importance: 'medium' })
     })
 
     act(() => {
@@ -46,6 +46,7 @@ describe('useTodoApp', () => {
           {
             id: 'old-done',
             title: '어제 끝낸 일',
+            startDate: '2026-04-04',
             dueDate: '2026-04-05',
             importance: 'medium',
             memo: '',
@@ -57,6 +58,7 @@ describe('useTodoApp', () => {
           {
             id: 'today-done',
             title: '오늘 끝낸 일',
+            startDate: '2026-04-06',
             dueDate: '2026-04-06',
             importance: 'medium',
             memo: '',
@@ -86,7 +88,7 @@ describe('useTodoApp', () => {
     const { result } = renderHook(() => useTodoApp('2026-04-06'))
 
     act(() => {
-      result.current.addTask({ title: '내일로', dueDate: '2026-04-06', importance: 'medium' })
+      result.current.addTask({ title: '내일로', startDate: '2026-04-06', dueDate: '2026-04-06', importance: 'medium' })
     })
 
     act(() => {
@@ -119,7 +121,7 @@ describe('useTodoApp', () => {
     const { result } = renderHook(() => useTodoApp('2026-04-06'))
 
     act(() => {
-      result.current.addTask({ title: '상세 편집', dueDate: '2026-04-15', importance: 'low' })
+      result.current.addTask({ title: '상세 편집', startDate: '2026-04-06', dueDate: '2026-04-15', importance: 'low' })
     })
 
     act(() => {
@@ -133,6 +135,20 @@ describe('useTodoApp', () => {
     expect(result.current.tasks[0]?.memo).toBe('체크할 메모')
     expect(result.current.tasks[0]?.manualStatuses.today).toBe(true)
     expect(result.current.tasks[0]?.importance).toBe('high')
+  })
+
+  it('keeps start date when editing a task', () => {
+    const { result } = renderHook(() => useTodoApp('2026-04-06'))
+
+    act(() => {
+      result.current.addTask({ title: '시작일 테스트', startDate: '2026-04-06', dueDate: '2026-04-10', importance: 'medium' })
+    })
+
+    act(() => {
+      result.current.updateTask(result.current.tasks[0]!.id, { startDate: '2026-04-08' })
+    })
+
+    expect(result.current.tasks[0]?.startDate).toBe('2026-04-08')
   })
 
   it('hydrates from localStorage once', () => {
