@@ -160,7 +160,7 @@ export const TaskComposer = ({ onSubmit, defaultDate }: { onSubmit: (input: Task
                     setCalendarCursor(todayStr)
                   }}
                 >
-                  오늘 ✓
+                  오늘
                 </button>
                 <button
                   type="button"
@@ -172,8 +172,7 @@ export const TaskComposer = ({ onSubmit, defaultDate }: { onSubmit: (input: Task
                     setCalendarCursor(tomorrowStr)
                   }}
                 >
-                  내일 ✓
-                </button>
+                  내일</button>
                 <button
                   type="button"
                   className={`option-chip ${dateTarget === 'start' && startDateMode === 'week' && !showDatePicker ? 'option-chip--active' : ''}`}
@@ -298,7 +297,7 @@ export const TaskComposer = ({ onSubmit, defaultDate }: { onSubmit: (input: Task
                     setCalendarCursor(todayStr)
                   }}
                 >
-                  오늘 ✓
+                  오늘
                 </button>
                 <button
                   type="button"
