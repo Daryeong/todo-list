@@ -59,6 +59,7 @@ export const TaskComposer = ({ onSubmit, defaultDate }: { onSubmit: (input: Task
 
   const todayStr = defaultDate
   const tomorrowStr = addDays(defaultDate, 1)
+  const weekStr = addDays(defaultDate, 7)
   const dueDateMode = dueDate === todayStr ? 'today' : dueDate === tomorrowStr ? 'tomorrow' : 'custom'
   const startDateMode = startDate === todayStr ? 'today' : startDate === tomorrowStr ? 'tomorrow' : 'custom'
   const activeDateValue = dateTarget === 'due' ? dueDate : startDate
@@ -171,8 +172,18 @@ export const TaskComposer = ({ onSubmit, defaultDate }: { onSubmit: (input: Task
                     setCalendarCursor(tomorrowStr)
                   }}
                 >
-                  내일
-                </button>
+                  내일</button>
+                <button
+                  type="button"
+                  className={`option-chip ${dateTarget === 'start' && startDateMode === 'week' && !showDatePicker ? 'option-chip--active' : ''}`}
+                  onClick={() => {
+                    setDateTarget('start')
+                    setStartDate(weekStr)
+                    closePickers()
+                    setCalendarCursor(weekStr)
+                  }}
+                >
+                  일주일</button>
                 <button
                   type="button"
                   aria-label={dateTarget === 'start' && isCustomDate || startDateMode === 'custom' ? formatShortKoreanDate(startDate) : '시작일 선택'}
@@ -296,8 +307,18 @@ export const TaskComposer = ({ onSubmit, defaultDate }: { onSubmit: (input: Task
                     setCalendarCursor(tomorrowStr)
                   }}
                 >
-                  내일
-                </button>
+                  내일</button>
+                <button
+                  type="button"
+                  className={`option-chip ${dateTarget === 'due' && dueDateMode === 'week' && !showDatePicker ? 'option-chip--active' : ''}`}
+                  onClick={() => {
+                    setDateTarget('due')
+                    setDueDate(weekStr)
+                    closePickers()
+                    setCalendarCursor(weekStr)
+                  }}
+                >
+                  일주일</button>
                 <button
                   type="button"
                   aria-label={dateTarget === 'due' && isCustomDate || dueDateMode === 'custom' ? formatShortKoreanDate(dueDate) : '날짜 선택'}
