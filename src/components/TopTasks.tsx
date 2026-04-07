@@ -32,14 +32,11 @@ export const TopTasks = ({
               />
             </div>
             <div className="task-card-copy" onClick={() => onOpenDetail(task.id)} role="button" tabIndex={0}>
-              <strong>{task.title}</strong>
+              <strong><span className={`importance-indicator importance-indicator--${task.importance}`}>{task.importance === "low" ? "○" : task.importance === "medium" ? "◑" : "●"}</span> {task.title}</strong>
               {task.memo ? <p className="task-meta">{task.memo}</p> : null}
             </div>
             <div className="task-card-side" onClick={() => onOpenDetail(task.id)} role="button" tabIndex={0}>
               <span className="task-date">{formatShortKoreanDate(task.dueDate)}</span>
-              <span className={`importance-indicator importance-indicator--${task.importance}`}>
-                {task.importance === "low" ? "○" : task.importance === "medium" ? "◑" : "●"}
-              </span>
             </div>
           </div>
         </article>

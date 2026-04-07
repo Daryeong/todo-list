@@ -97,7 +97,7 @@ export const TaskComposer = ({ onSubmit, defaultDate }: { onSubmit: (input: Task
   }
 
   const handleSubmit = () => {
-    if (!title.trim()) return
+    if (!title.trim() || !startDate.trim() || !dueDate.trim() || !importance) return
     onSubmit({ title: title.trim(), startDate, dueDate, importance })
     setTitle('')
     setStartDate(defaultDate)
