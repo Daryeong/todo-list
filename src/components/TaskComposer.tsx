@@ -425,7 +425,7 @@ export const TaskComposer = ({ onSubmit, defaultDate }: { onSubmit: (input: Task
             <div className="option-chips">
               {importanceOptions.map((opt) => (
                 <button key={opt.value} type="button" className={`option-chip ${importance === opt.value ? 'option-chip--active' : ''}`} onClick={() => setImportance(opt.value)}>
-                  <span className={`importance-dot importance-dot--${opt.value}`}>{opt.dot}</span>
+                  <span className={`importance-dot importance-dot--${opt.value}`}></span>
                   {opt.label}
                 </button>
               ))}
