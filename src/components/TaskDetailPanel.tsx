@@ -12,6 +12,7 @@ export const TaskDetailPanel = ({
   task: Task
   onClose: () => void
   onSave: (taskId: string, patch: Partial<Task>) => void
+  onDelete: (taskId: string) => void
   onMoveToTomorrow: (taskId: string) => void
 }) => {
   const [draft, setDraft] = useState(task)
@@ -89,6 +90,9 @@ export const TaskDetailPanel = ({
           </button>
           <TaskStepsEditor steps={draft.steps} />
           <div className="detail-actions">
+            <button className="danger-button" onClick={() => onDelete(task.id)} type="button">
+              삭제하기
+            </button>
             <button className="ghost-button" onClick={() => onMoveToTomorrow(task.id)} type="button">
               내일로 넘기기
             </button>

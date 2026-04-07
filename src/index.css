@@ -817,3 +817,11 @@ textarea:focus {
     border-radius: 0;
   }
 }
+
+.importance-indicator {
+  margin-left: 6px;
+  font-size: 0.75rem;
+}
+.importance-indicator--low { color: #a3a3a3; }
+.importance-indicator--medium { color: #262626; }
+.importance-indicator--high { color: #262626; font-weight: bold; }

@@ -61,6 +61,13 @@ export const useTodoApp = (today = toDateOnly(new Date().toISOString())) => {
     }))
   }
 
+  const deleteTask = (taskId: string) => {
+    setState((current) => ({
+      ...current,
+      tasks: current.tasks.filter((task) => task.id !== taskId),
+    }))
+  }
+
   const updateSettings = (partial: Partial<Settings>) => {
     setState((current) => ({ ...current, settings: mergeSettings(current.settings, partial) }))
   }
@@ -77,6 +84,7 @@ export const useTodoApp = (today = toDateOnly(new Date().toISOString())) => {
     completeTask,
     moveTaskToTomorrow,
     updateSettings,
+    deleteTask,
   }
 }
 

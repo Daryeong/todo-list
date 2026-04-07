@@ -22,6 +22,7 @@ function App({ today = defaultToday }: { today?: string }) {
     updateTask,
     completeTask,
     moveTaskToTomorrow,
+    deleteTask,
     updateSettings,
   } = useTodoApp(today)
   const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null)
@@ -51,12 +52,13 @@ function App({ today = defaultToday }: { today?: string }) {
             tasks={openTasks}
           />
           <div className="panel-divider" />
-          <CompletedTasks tasks={todayCompletedTasks} />
+          <CompletedTasks tasks={todayCompletedTasks} onDelete={deleteTask} />
         </section>
       </div>
       {selectedTask ? (
         <TaskDetailPanel
           onClose={() => setSelectedTaskId(null)}
+          onDelete={deleteTask}
           onMoveToTomorrow={moveTaskToTomorrow}
           onSave={updateTask}
           task={selectedTask}

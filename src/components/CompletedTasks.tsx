@@ -1,7 +1,7 @@
 import { formatShortKoreanDate } from '../lib/date'
 import type { Task } from '../types/task'
 
-export const CompletedTasks = ({ tasks }: { tasks: Task[] }) => (
+export const CompletedTasks = ({ tasks, onDelete }: { tasks: Task[]; onDelete: (taskId: string) => void }) => (
   <div>
     <div className="panel-title-row">
       <div>
@@ -24,6 +24,7 @@ export const CompletedTasks = ({ tasks }: { tasks: Task[] }) => (
             </div>
             <div className="task-card-side">
               <span className="task-date">{formatShortKoreanDate(task.dueDate)}</span>
+              <button className="tiny-delete-btn" onClick={() => onDelete(task.id)} type="button">×</button>
             </div>
           </div>
         </article>

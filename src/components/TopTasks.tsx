@@ -37,6 +37,9 @@ export const TopTasks = ({
             </div>
             <div className="task-card-side" onClick={() => onOpenDetail(task.id)} role="button" tabIndex={0}>
               <span className="task-date">{formatShortKoreanDate(task.dueDate)}</span>
+              <span className={`importance-indicator importance-indicator--${task.importance}`}>
+                {task.importance === "low" ? "○" : task.importance === "medium" ? "◑" : "●"}
+              </span>
             </div>
           </div>
         </article>
