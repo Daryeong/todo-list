@@ -375,7 +375,7 @@ button {
 
 .option-chip--date {
   position: relative;
-  min-width: 124px;
+  min-width: 90px;
   justify-content: center;
   padding: 6px 12px;
   border-color: rgba(163, 163, 163, 0.16);
