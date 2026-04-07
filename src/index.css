@@ -285,7 +285,7 @@ button {
 }
 
 .composer-input::placeholder {
-  color: #c0bfb9;
+  color: #a3a3a3;
 }
 
 .composer-add-btn {
@@ -537,9 +537,9 @@ button {
   line-height: 1;
 }
 
-.importance-dot--low { color: #c0bfb9; }
-.importance-dot--medium { color: #f59e0b; }
-.importance-dot--high { color: #ef4444; }
+.importance-dot--low { color: #a3a3a3; }
+.importance-dot--medium { color: #262626; }
+.importance-dot--high { color: #262626; }
 
 input,
 select,
