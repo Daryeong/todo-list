@@ -351,15 +351,15 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  border: 1px solid rgba(0, 0, 0, 0.07);
-  border-radius: 7px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 20px;
   background: #fafafa;
-  padding: 5px 11px;
-  font-size: 0.8rem;
+  padding: 8px 14px;
+  font-size: 0.85rem;
   font-weight: 500;
   color: #6b6b6b;
   cursor: pointer;
-  transition: all 0.12s ease;
+  transition: all 0.15s ease;
 }
 
 .option-chip:hover {
@@ -368,7 +368,7 @@ button {
 
 .option-chip--active {
   border-color: #a3a3a3;
-  background: rgba(163, 163, 163, 0.05);
+  background: #e5e5e5;
   color: #191919;
   font-weight: 600;
 }
@@ -637,6 +637,24 @@ textarea:focus {
   gap: 12px;
 }
 
+
+.task-card-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.task-card-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.task-title {
+  flex: 1;
+  font-size: 0.95rem;
+}
 .task-card-status {
   display: flex;
   align-items: center;
@@ -832,6 +850,7 @@ textarea:focus {
 
   .option-chips {
     flex-wrap: wrap;
+    gap: 8px;
   }
 
   .option-chip {
