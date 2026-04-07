@@ -367,7 +367,7 @@ button {
 }
 
 .option-chip--active {
-  border-color: #2eaadc;
+  border-color: #a3a3a3;
   background: rgba(46, 170, 220, 0.05);
   color: #191919;
   font-weight: 600;
@@ -393,7 +393,7 @@ button {
 .date-chip-icon {
   display: inline-flex;
   align-items: center;
-  color: #2eaadc;
+  color: #a3a3a3;
 }
 
 .date-chip-text {
@@ -403,7 +403,7 @@ button {
 }
 
 .option-chip--date.option-chip--active {
-  border-color: #2eaadc;
+  border-color: #a3a3a3;
   background: linear-gradient(180deg, rgba(46, 170, 220, 0.12) 0%, rgba(46, 170, 220, 0.06) 100%);
   color: #0f172a;
 }
@@ -496,7 +496,7 @@ button {
 }
 
 .year-option--active {
-  border-color: #2eaadc;
+  border-color: #a3a3a3;
   background: rgba(46, 170, 220, 0.08);
   color: #0f172a;
 }
@@ -524,7 +524,7 @@ button {
 }
 
 .calendar-day--active {
-  background: #2eaadc;
+  background: #a3a3a3;
   color: #ffffff;
 }
 
@@ -558,7 +558,7 @@ input:focus,
 select:focus,
 textarea:focus {
   outline: none;
-  border-color: #2eaadc;
+  border-color: #a3a3a3;
   box-shadow: 0 0 0 2px rgba(46, 170, 220, 0.12);
 }
 
@@ -574,7 +574,7 @@ textarea:focus {
 }
 
 .primary-button {
-  background: #2eaadc;
+  background: #a3a3a3;
   color: #ffffff;
 }
 
@@ -662,13 +662,13 @@ textarea:focus {
   width: 8px;
   height: 8px;
   border-radius: 3px;
-  background: #2eaadc;
+  background: #a3a3a3;
   transform: scale(0);
   transition: transform 0.12s ease;
 }
 
 .task-check:checked {
-  border-color: #2eaadc;
+  border-color: #a3a3a3;
   background: rgba(46, 170, 220, 0.08);
 }
 
