@@ -634,21 +634,20 @@ textarea:focus {
   display: flex;
   align-items: center;
   width: 100%;
-  gap: 12px;
+  gap: 8px;
 }
 
 .task-card-status {
   display: flex;
   align-items: center;
-  gap: 8px;
-  min-width: 50px;
+  min-width: 32px;
 }
 
 .task-card-importance {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
+  width: 20px;
 }
 
 .task-check {
@@ -703,10 +702,10 @@ textarea:focus {
 }
 
 .task-card-side {
-  display: grid;
-  justify-items: end;
-  gap: 6px;
-  min-width: 72px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 60px;
   cursor: pointer;
 }
 
@@ -738,10 +737,24 @@ textarea:focus {
   min-width: 40px;
   padding: 4px 8px;
   border-radius: 999px;
-  background: #f3f4f6;
-  color: #6b7280;
+  background: #e5e5e5;
+  color: #525252;
   font-size: 0.72rem;
   font-weight: 700;
+}
+
+.tiny-delete-btn {
+  background: none;
+  border: none;
+  color: #9b9a97;
+  cursor: pointer;
+  padding: 2px 6px;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.tiny-delete-btn:hover {
+  color: #ef4444;
 }
 
 .task-card--completed {
@@ -863,7 +876,7 @@ textarea:focus {
 
   .task-card-main {
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px;
   }
 
   .task-card-status {
@@ -872,9 +885,14 @@ textarea:focus {
     min-width: auto;
   }
 
-  .task-card-copy {
+  .task-card-importance {
     order: 2;
-    flex: 1 1 100%;
+    width: auto;
+  }
+
+  .task-card-copy {
+    order: 3;
+    flex: 1;
     min-width: 0;
   }
 
@@ -883,7 +901,7 @@ textarea:focus {
   }
 
   .task-card-side {
-    order: 3;
+    order: 4;
     width: auto;
     margin-left: auto;
   }
