@@ -533,14 +533,18 @@ button {
 }
 
 .importance-dot {
-  font-size: 0.65rem;
-  line-height: 1;
+.importance-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 4px;
 }
 
 .importance-dot--low { color: #c0bfb9; }
-.importance-dot--medium { color: #f59e0b; }
-.importance-dot--high { color: #ef4444; }
-
+.importance-dot--low { background: #a3a3a3; }
+.importance-dot--medium { background: linear-gradient(90deg, #a3a3a3 50%, transparent 50%); border: 1px solid #a3a3a3; box-sizing: border-box; }
+.importance-dot--high { background: #262626; }
 input,
 select,
 textarea {
@@ -834,6 +838,6 @@ textarea:focus {
   margin-right: 8px;
   vertical-align: middle;
 }
-.importance-dot-small--low { background: #c0bfb9; }
-.importance-dot-small--medium { background: #f59e0b; }
-.importance-dot-small--high { background: #ef4444; }
+.importance-dot-small--low { background: #a3a3a3; }
+.importance-dot-small--medium { background: linear-gradient(90deg, #a3a3a3 50%, transparent 50%); border: 1px solid #a3a3a3; }
+.importance-dot-small--high { background: #262626; }

@@ -4,8 +4,8 @@ import { addDays, formatShortKoreanDate } from '../lib/date'
 import type { Importance, TaskInput } from '../types/task'
 
 const importanceOptions: { value: Importance; label: string; dot: string }[] = [
-  { value: 'low', label: '낮음', dot: '○' },
-  { value: 'medium', label: '보통', dot: '◑' },
+  { value: 'low', label: '낮음', dot: '●' },
+  { value: 'medium', label: '보통', dot: '●' },
   { value: 'high', label: '높음', dot: '●' },
 ]
 
