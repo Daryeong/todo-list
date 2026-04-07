@@ -196,7 +196,9 @@ export const TaskComposer = ({ onSubmit, defaultDate }: { onSubmit: (input: Task
                       <path d="M4.5 1.8v2.4M9.5 1.8v2.4M2 5.2h10" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
                     </svg>
                   </span>
-                  <span className="date-chip-text">{startDate ? formatShortKoreanDate(startDate) : '날짜 선택'}</span>
+                  <span className="date-chip-text">
+                    {startDateMode === "today" ? "오늘 ✓" : startDateMode === "tomorrow" ? "내일 ✓" : startDateMode === "week" ? "일주일" : startDate ? formatShortKoreanDate(startDate) : "날짜 선택"}
+                  </span>
                 </button>
               </div>
             </div>
@@ -331,7 +333,9 @@ export const TaskComposer = ({ onSubmit, defaultDate }: { onSubmit: (input: Task
                       <path d="M4.5 1.8v2.4M9.5 1.8v2.4M2 5.2h10" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
                     </svg>
                   </span>
-                  <span className="date-chip-text">{dateTarget === 'due' && isCustomDate || dueDateMode === 'custom' || dueDateMode === 'week' ? formatShortKoreanDate(dueDate) : '날짜 선택'}</span>
+                  <span className="date-chip-text">
+                    {dueDateMode === "today" ? "오늘 ✓" : dueDateMode === "tomorrow" ? "내일 ✓" : dueDateMode === "week" ? "일주일" : dueDate ? formatShortKoreanDate(dueDate) : "날짜 선택"}
+                  </span>
                 </button>
               </div>
             </div>
