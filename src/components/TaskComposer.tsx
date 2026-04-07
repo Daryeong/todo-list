@@ -114,7 +114,7 @@ export const TaskComposer = ({ onSubmit, defaultDate }: { onSubmit: (input: Task
     }
 
     const handlePointerDown = (event: MouseEvent) => {
-      if (!composerRef.current?.contains(event.target as Node)) {
+      if (showDatePicker && composerRef.current?.querySelector(".calendar-popover") && !composerRef.current.querySelector(".calendar-popover").contains(event.target as Node)) {
         closePickers()
       }
     }
