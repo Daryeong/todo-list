@@ -27,7 +27,7 @@ It should include:
 - a compact helper line explaining where the labels appear in the app
 - sensible defaults from `createDefaultSettings()`
 
-### 3. Coach Tone
+### 3. List Tone
 This section will keep the tone selector, but give it equal visual weight with the other settings rather than making it the only visible control.
 
 It should include:

@@ -1,4 +1,4 @@
-export type CoachTone = 'encouraging' | 'plain' | 'funny' | 'strict'
+export type ListTone = 'encouraging' | 'plain' | 'funny' | 'strict'
 
 export interface Settings {
   todayThresholdDays: number
@@ -9,7 +9,7 @@ export interface Settings {
     late: string
     flexible: string
   }
-  tone: CoachTone
+  tone: ListTone
 }
 
 export const createDefaultSettings = (): Settings => ({

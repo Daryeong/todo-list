@@ -2,7 +2,7 @@
 
 > **에이전트 작업용:** REQUIRED SUB-SKILL: 이 계획을 실제 구현할 때는 `superpowers:subagent-driven-development`(권장) 또는 `superpowers:executing-plans`를 사용한다. 진행 추적은 체크박스(`- [ ]`) 형식을 따른다.
 
-**목표:** 빠른 할 일 추가, 자동 상태 분류, 상세 편집, 완료 흐름, 간단한 설정을 포함한 코치형 투두 앱 MVP를 구현한다.
+**목표:** 빠른 할 일 추가, 자동 상태 분류, 상세 편집, 완료 흐름, 간단한 설정을 포함한 리스트형 투두 앱 MVP를 구현한다.
 
 **아키텍처:** React + TypeScript + Vite 기반의 작은 웹앱으로 구성하고, 데이터는 로컬 상태와 `localStorage`에 저장한다. 날짜 기반 상태 판정은 순수 함수 유틸로 분리해 UI와 독립적으로 테스트할 수 있게 만든다.
 
@@ -76,7 +76,7 @@
 - 생성: `src/components/TaskComposer.tsx`
 - 생성: `src/components/TopTasks.tsx`
 - 생성: `src/components/CompletedTasks.tsx`
-- 생성: `src/components/CoachBanner.tsx`
+- 생성: `src/components/ListBanner.tsx`
 - 생성: `src/components/AchievementSummary.tsx`
 - 생성: `src/components/StatusIcon.tsx`
 - 생성: `src/components/LayoutShell.tsx`
@@ -85,7 +85,7 @@
 - 테스트: `src/lib/coachCopy.test.ts`
 
 - [ ] 오늘 날짜 표시, 할 일 입력, 할 일 목록, 성취 요약, 완료 영역 테스트를 먼저 작성한다.
-- [ ] 코치 문구가 날짜에 따라 바뀌고 톤 설정을 따르는 테스트를 작성한다.
+- [ ] 리스트 문구가 날짜에 따라 바뀌고 톤 설정을 따르는 테스트를 작성한다.
 - [ ] 메인 화면에서 오늘 날짜가 보이는지 검증하는 테스트를 포함한다.
 - [ ] 테스트를 실행해 기대한 이유로 실패하는지 확인한다.
 - [ ] 단순하지만 의도 있는 레이아웃으로 메인 화면을 구현한다.
@@ -114,7 +114,7 @@
 
 - [ ] `오늘 마감 기준`, `늦은 일 기준`, `여유 기준 일수` 수정 테스트를 먼저 작성한다.
 - [ ] `오늘 마감`, `늦은 일`, `여유` 라벨 변경 테스트를 추가한다.
-- [ ] 코치 문구 톤 변경 테스트를 추가한다.
+- [ ] 리스트 문구 톤 변경 테스트를 추가한다.
 - [ ] 테스트를 실행해 기대한 이유로 실패하는지 확인한다.
 - [ ] 최소 구현으로 설정 패널을 만든다.
 - [ ] 설정 화면 테스트가 통과하는지 확인한다.

@@ -2,7 +2,7 @@ import { createDefaultSettings, type Settings } from '../types/settings'
 import type { Task } from '../types/task'
 import { toDateOnly } from './date'
 
-export const STORAGE_KEY = 'todo-coach-app'
+export const STORAGE_KEY = 'todo-list-app'
 
 export interface StoredAppState {
   tasks: Task[]

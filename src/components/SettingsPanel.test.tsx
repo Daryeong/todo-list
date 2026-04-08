@@ -34,7 +34,7 @@ describe('SettingsPanel', () => {
     await user.type(todayLabel, 'Now')
     await user.clear(screen.getByLabelText('마감 라벨'))
     await user.type(screen.getByLabelText('마감 라벨'), '늦은 일')
-    await user.selectOptions(screen.getByRole('combobox', { name: '코치 말투' }), 'strict')
+    await user.selectOptions(screen.getByRole('combobox', { name: '리스트 말투' }), 'strict')
     await user.click(screen.getByRole('button', { name: '설정 저장' }))
 
     expect(onSave).toHaveBeenCalledWith(

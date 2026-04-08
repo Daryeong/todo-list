@@ -1,6 +1,6 @@
 import { formatKoreanDate } from '../lib/date'
 
-export const CoachBanner = ({
+export const ListBanner = ({
   today,
   message,
   completedCount,

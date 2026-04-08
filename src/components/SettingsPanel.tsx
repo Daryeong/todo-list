@@ -48,7 +48,7 @@ export const SettingsPanel = ({
         <div className="panel-title-row">
           <div>
             <h2 id="settings-panel-title">설정</h2>
-            <p className="section-caption">현재 화면의 작업 분류와 코치 말투를 조정합니다.</p>
+            <p className="section-caption">현재 화면의 작업 분류와 리스트 말투를 조정합니다.</p>
           </div>
           <button className="ghost-button" onClick={onClose} type="button">
             닫기
@@ -133,13 +133,13 @@ export const SettingsPanel = ({
 
           <section className="settings-section" aria-labelledby="settings-tone-title">
             <div>
-              <h3 id="settings-tone-title">코치 말투</h3>
+              <h3 id="settings-tone-title">리스트 말투</h3>
               <p className="section-caption">배너 문구에 쓰이는 말투를 고릅니다.</p>
             </div>
             <label className="setting-item">
-              <span>코치 말투</span>
+              <span>리스트 말투</span>
               <select
-                aria-label="코치 말투"
+                aria-label="리스트 말투"
                 value={draft.tone}
                 onChange={(event) =>
                   setDraft((current) => ({

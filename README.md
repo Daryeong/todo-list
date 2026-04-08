@@ -1,4 +1,4 @@
-# Todo Coach App
+# Todo List App
 
 A local-first PWA todo app built with React, TypeScript, and Vite. Tasks and settings are stored in browser `localStorage`, so the app stays on the device and can be installed on iPhone as a Home Screen web app.
 
@@ -6,7 +6,7 @@ A local-first PWA todo app built with React, TypeScript, and Vite. Tasks and set
 
 - Add, edit, complete, and delete tasks
 - Move unfinished tasks to tomorrow
-- Show today's completion count and coaching copy
+- Show today's completion count and list copy
 - Keep state in browser storage
 - Cache the app shell for offline use
 

@@ -6,7 +6,7 @@ Rework the existing settings drawer into a structured settings panel that reflec
 The new panel will organize the available settings into clear sections:
 - task classification thresholds
 - label copy for the task buckets
-- coaching tone
+- list tone
 
 ## Why
 Right now, the settings UI hides most of the available configuration behind one tone dropdown, even though the data model already supports task thresholds and custom labels. That makes the panel feel disconnected from the rest of the app and harder to scan.

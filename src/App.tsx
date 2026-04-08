@@ -1,13 +1,13 @@
 import { useMemo, useState } from 'react'
 
-import { CoachBanner } from './components/CoachBanner'
+import { ListBanner } from './components/ListBanner'
 import { CompletedTasks } from './components/CompletedTasks'
 import { LayoutShell } from './components/LayoutShell'
 import { SettingsPanel } from './components/SettingsPanel'
 import { TaskComposer } from './components/TaskComposer'
 import { TaskDetailPanel } from './components/TaskDetailPanel'
 import { TopTasks } from './components/TopTasks'
-import { getCoachCopy } from './lib/coachCopy'
+import { getListCopy } from './lib/listCopy'
 import { toDateOnly } from './lib/date'
 import { useTodoApp } from './hooks/useTodoApp'
 
@@ -29,14 +29,14 @@ function App({ today = defaultToday }: { today?: string }) {
   const [settingsOpen, setSettingsOpen] = useState(false)
 
   const selectedTask = openTasks.find((task) => task.id === selectedTaskId) ?? null
-  const coachCopy = useMemo(() => getCoachCopy(settings.tone, today), [settings.tone, today])
+  const listCopy = useMemo(() => getListCopy(settings.tone, today), [settings.tone, today])
 
   return (
     <LayoutShell
       header={
-        <CoachBanner
+        <ListBanner
           today={today}
-          message={coachCopy}
+          message={listCopy}
           completedCount={todayCompletedTasks.length}
           onOpenSettings={() => setSettingsOpen(true)}
         />

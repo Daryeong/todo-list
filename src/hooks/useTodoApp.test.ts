@@ -40,7 +40,7 @@ describe('useTodoApp', () => {
 
   it('shows only today completed tasks in the today-completed list', () => {
     localStorage.setItem(
-      'todo-coach-app',
+      'todo-list-app',
       JSON.stringify({
         tasks: [
           {
@@ -114,7 +114,7 @@ describe('useTodoApp', () => {
 
     expect(result.current.settings.flexibleThresholdDays).toBe(10)
     expect(result.current.settings.labels.today).toBe('오늘 꼭')
-    expect(JSON.parse(localStorage.getItem('todo-coach-app') ?? '{}').settings.labels.today).toBe('오늘 꼭')
+    expect(JSON.parse(localStorage.getItem('todo-list-app') ?? '{}').settings.labels.today).toBe('오늘 꼭')
   })
 
   it('edits memo and status overrides', () => {
@@ -154,7 +154,7 @@ describe('useTodoApp', () => {
   it('hydrates from localStorage once', () => {
     vi.spyOn(Storage.prototype, 'getItem')
     localStorage.setItem(
-      'todo-coach-app',
+      'todo-list-app',
       JSON.stringify({
         tasks: [],
         settings: {

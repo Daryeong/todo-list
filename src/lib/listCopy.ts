@@ -1,4 +1,4 @@
-import type { CoachTone } from '../types/settings'
+import type { ListTone } from '../types/settings'
 
 const encouraging = [
   '시작이 반이다.',
@@ -102,7 +102,7 @@ const strict = [
   '시작하면 된다.',
 ]
 
-export const getCoachCopy = (tone: CoachTone, today: string) => {
+export const getListCopy = (tone: ListTone, today: string) => {
   const pools = { encouraging, plain, funny, strict }
   const pool = pools[tone] || encouraging
   const dayNum = today.split('-').join('')
