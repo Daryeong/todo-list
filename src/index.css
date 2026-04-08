@@ -246,6 +246,58 @@ button {
   padding: 20px;
 }
 
+.settings-panel .panel-title-row {
+  align-items: flex-start;
+}
+
+.settings-panel .panel-title-row > div {
+  min-width: 0;
+}
+
+.settings-content {
+  display: grid;
+  gap: 16px;
+}
+
+.settings-section {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+  background: #fafafa;
+}
+
+.settings-section h3 {
+  margin: 0;
+  font-size: 0.96rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #191919;
+}
+
+.settings-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.setting-item {
+  display: grid;
+  gap: 6px;
+}
+
+.setting-item span {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #6b6b6b;
+}
+
+.settings-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 4px;
+}
+
 .panel-title-row h2,
 .steps-box h3 {
   margin: 0;
@@ -936,6 +988,18 @@ textarea:focus {
   .panel-title-row {
     flex-wrap: wrap;
     gap: 8px;
+  }
+
+  .settings-section {
+    padding: 14px;
+  }
+
+  .settings-actions {
+    justify-content: stretch;
+  }
+
+  .settings-actions button {
+    width: 100%;
   }
 
   .panel-title-row h2 {

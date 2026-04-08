@@ -1,0 +1,7 @@
+name: settings-panel-from-layout
+status: draft
+description: Rework the settings drawer into a structured panel that mirrors the app's page composition and exposes the existing configuration fields.
+artifacts:
+  - proposal.md
+  - design.md
+  - tasks.md
