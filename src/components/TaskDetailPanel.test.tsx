@@ -23,12 +23,19 @@ describe('TaskDetailPanel', () => {
   it('keeps the moved due date when props refresh before save', async () => {
     const user = userEvent.setup()
     const onClose = vi.fn()
+    const onDelete = vi.fn()
     const onSave = vi.fn()
     const onMoveToTomorrow = vi.fn()
     const initialTask = createTask()
 
     const { rerender } = render(
-      <TaskDetailPanel task={initialTask} onClose={onClose} onMoveToTomorrow={onMoveToTomorrow} onSave={onSave} />,
+      <TaskDetailPanel
+        task={initialTask}
+        onClose={onClose}
+        onDelete={onDelete}
+        onMoveToTomorrow={onMoveToTomorrow}
+        onSave={onSave}
+      />,
     )
 
     await user.click(screen.getByRole('button', { name: '내일로 넘기기' }))
@@ -38,6 +45,7 @@ describe('TaskDetailPanel', () => {
       <TaskDetailPanel
         task={createTask({ dueDate: '2026-04-07' })}
         onClose={onClose}
+        onDelete={onDelete}
         onMoveToTomorrow={onMoveToTomorrow}
         onSave={onSave}
       />,
@@ -51,10 +59,17 @@ describe('TaskDetailPanel', () => {
   it('trims title and blocks save when title or due date is empty', async () => {
     const user = userEvent.setup()
     const onClose = vi.fn()
+    const onDelete = vi.fn()
     const onSave = vi.fn()
 
     render(
-      <TaskDetailPanel task={createTask()} onClose={onClose} onMoveToTomorrow={vi.fn()} onSave={onSave} />,
+      <TaskDetailPanel
+        task={createTask()}
+        onClose={onClose}
+        onDelete={onDelete}
+        onMoveToTomorrow={vi.fn()}
+        onSave={onSave}
+      />,
     )
 
     const titleInput = screen.getByLabelText('제목')
@@ -79,9 +94,18 @@ describe('TaskDetailPanel', () => {
 
   it('saves edited start date', async () => {
     const user = userEvent.setup()
+    const onDelete = vi.fn()
     const onSave = vi.fn()
 
-    render(<TaskDetailPanel task={createTask()} onClose={vi.fn()} onMoveToTomorrow={vi.fn()} onSave={onSave} />)
+    render(
+      <TaskDetailPanel
+        task={createTask()}
+        onClose={vi.fn()}
+        onDelete={onDelete}
+        onMoveToTomorrow={vi.fn()}
+        onSave={onSave}
+      />,
+    )
 
     const startDateInput = screen.getByLabelText('시작일')
     await user.clear(startDateInput)
@@ -89,5 +113,24 @@ describe('TaskDetailPanel', () => {
     await user.click(screen.getByRole('button', { name: '저장' }))
 
     expect(onSave).toHaveBeenCalledWith('task-1', expect.objectContaining({ startDate: '2026-04-07' }))
+  })
+
+  it('deletes the task from the detail panel', async () => {
+    const user = userEvent.setup()
+    const onDelete = vi.fn()
+
+    render(
+      <TaskDetailPanel
+        task={createTask()}
+        onClose={vi.fn()}
+        onDelete={onDelete}
+        onMoveToTomorrow={vi.fn()}
+        onSave={vi.fn()}
+      />,
+    )
+
+    await user.click(screen.getByRole('button', { name: '삭제하기' }))
+
+    expect(onDelete).toHaveBeenCalledWith('task-1')
   })
 })

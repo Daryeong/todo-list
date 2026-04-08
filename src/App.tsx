@@ -48,6 +48,7 @@ function App({ today = defaultToday }: { today?: string }) {
           <div className="panel-divider" />
           <TopTasks
             onComplete={completeTask}
+            onDelete={deleteTask}
             onOpenDetail={setSelectedTaskId}
             tasks={openTasks}
           />

@@ -60,8 +60,8 @@ export const TaskComposer = ({ onSubmit, defaultDate }: { onSubmit: (input: Task
   const todayStr = defaultDate
   const tomorrowStr = addDays(defaultDate, 1)
   const weekStr = addDays(defaultDate, 7)
-  const dueDateMode = dueDate === todayStr ? 'today' : dueDate === tomorrowStr ? 'tomorrow' : 'custom'
-  const startDateMode = startDate === todayStr ? 'today' : startDate === tomorrowStr ? 'tomorrow' : 'custom'
+  const dueDateMode = dueDate === todayStr ? 'today' : dueDate === tomorrowStr ? 'tomorrow' : dueDate === weekStr ? 'week' : 'custom'
+  const startDateMode = startDate === todayStr ? 'today' : startDate === tomorrowStr ? 'tomorrow' : startDate === weekStr ? 'week' : 'custom'
   const activeDateValue = dateTarget === 'due' ? dueDate : startDate
   const activeMode = dateTarget === 'due' ? dueDateMode : startDateMode
   const isCustomDate = showDatePicker || (activeMode === 'custom' && activeDateValue !== '')
@@ -114,7 +114,9 @@ export const TaskComposer = ({ onSubmit, defaultDate }: { onSubmit: (input: Task
     }
 
     const handlePointerDown = (event: MouseEvent) => {
-      if (showDatePicker && composerRef.current?.querySelector(".calendar-popover") && !composerRef.current.querySelector(".calendar-popover").contains(event.target as Node)) {
+      const calendarPopover = composerRef.current?.querySelector('.calendar-popover')
+
+      if (calendarPopover && !calendarPopover.contains(event.target as Node)) {
         closePickers()
       }
     }

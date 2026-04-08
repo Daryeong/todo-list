@@ -7,6 +7,7 @@ export const TaskDetailPanel = ({
   task,
   onClose,
   onSave,
+  onDelete,
   onMoveToTomorrow,
 }: {
   task: Task

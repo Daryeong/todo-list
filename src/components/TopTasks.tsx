@@ -5,10 +5,12 @@ export const TopTasks = ({
   tasks,
   onOpenDetail,
   onComplete,
+  onDelete,
 }: {
   tasks: Task[]
   onOpenDetail: (taskId: string) => void
   onComplete: (taskId: string) => void
+  onDelete: (taskId: string) => void
 }) => (
   <div>
     <div className="panel-title-row">
@@ -40,6 +42,7 @@ export const TopTasks = ({
             </div>
             <div className="task-card-side" onClick={() => onOpenDetail(task.id)} role="button" tabIndex={0}>
               <span className="task-date">{formatShortKoreanDate(task.dueDate)}</span>
+              <button className="tiny-delete-btn" onClick={() => onDelete(task.id)} type="button">×</button>
             </div>
           </div>
         </article>
