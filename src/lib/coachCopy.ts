@@ -76,8 +76,35 @@ const plain = [
   '한 번에 하나씩 해나가면 됩니다.',
 ]
 
+const funny = [
+  '오늘도 아자아자! (orz)',
+  '할 일列表에서 도망치지 마~',
+  '오늘 안 하면 내일ifecycle...',
+  '미루기大师는 이제 그만!',
+  '할 일: 지금 당장! (아마도)',
+  '오늘의 全-task, 시작GO!',
+  '拖延하면 Sunder!',
+  '할 일リストの刑期은 오늘이 아니야!',
+  '오늘 할 건 오늘 끝내버려!',
+  '미루기.gif는 그만!',
+]
+
+const strict = [
+  '오늘 할 일은 오늘 끝내라.',
+  '미루지 말고 바로 시작해.',
+  '일단 하고말해.',
+  '생각하지 말고行动해.',
+  '오늘 안 하면 내일이다.',
+  '미루는 것도消耗다.',
+  '할 일 있으면 바로處理.',
+  '오늘 목표 달성하자.',
+  '계속 미루면 절대 끝나지 않아.',
+  '시작하면 된다.',
+]
+
 export const getCoachCopy = (tone: CoachTone, today: string) => {
-  const pool = tone === 'encouraging' ? encouraging : plain
+  const pools = { encouraging, plain, funny, strict }
+  const pool = pools[tone] || encouraging
   const dayNum = today.split('-').join('')
   const index = Number(dayNum) % pool.length
   return pool[index]!

@@ -1,4 +1,4 @@
-export type CoachTone = 'encouraging' | 'plain'
+export type CoachTone = 'encouraging' | 'plain' | 'funny' | 'strict'
 
 export interface Settings {
   todayThresholdDays: number

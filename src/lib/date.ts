@@ -34,3 +34,10 @@ export const formatShortKoreanDate = (value: string) =>
         day: 'numeric',
       }).format(parseDateOnly(value)).replace(/ /g, '')
     : '-'
+
+export const formatDateWithToday = (value: string, today: string) => {
+  if (!value) return '-'
+  if (value === today) return '오늘'
+  if (value === addDays(today, 1)) return '내일'
+  return formatShortKoreanDate(value)
+}
