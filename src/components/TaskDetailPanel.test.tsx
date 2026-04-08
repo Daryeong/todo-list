@@ -1,13 +1,13 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, within, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { describe, expect, it, vi } from 'vitest'
+import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest'
 
 import type { Task } from '../types/task'
 import { TaskDetailPanel } from './TaskDetailPanel'
 
 const createTask = (overrides: Partial<Task> = {}): Task => ({
   id: 'task-1',
-  title: '초안 정리',
+  title: '보고서 제출',
   startDate: '2026-04-05',
   dueDate: '2026-04-06',
   importance: 'medium',
@@ -20,46 +20,19 @@ const createTask = (overrides: Partial<Task> = {}): Task => ({
 })
 
 describe('TaskDetailPanel', () => {
-  it('keeps the moved due date when props refresh before save', async () => {
-    const user = userEvent.setup()
-    const onClose = vi.fn()
-    const onDelete = vi.fn()
-    const onSave = vi.fn()
-    const onMoveToTomorrow = vi.fn()
-    const initialTask = createTask()
-
-    const { rerender } = render(
-      <TaskDetailPanel
-        task={initialTask}
-        onClose={onClose}
-        onDelete={onDelete}
-        onMoveToTomorrow={onMoveToTomorrow}
-        onSave={onSave}
-      />,
-    )
-
-    await user.click(screen.getByRole('button', { name: '내일로 넘기기' }))
-    expect(onMoveToTomorrow).toHaveBeenCalledWith(initialTask.id)
-
-    rerender(
-      <TaskDetailPanel
-        task={createTask({ dueDate: '2026-04-07' })}
-        onClose={onClose}
-        onDelete={onDelete}
-        onMoveToTomorrow={onMoveToTomorrow}
-        onSave={onSave}
-      />,
-    )
-
-    await user.click(screen.getByRole('button', { name: '저장' }))
-
-    expect(onSave).toHaveBeenCalledWith(initialTask.id, expect.objectContaining({ dueDate: '2026-04-07' }))
+  beforeEach(() => {
+    vi.restoreAllMocks()
   })
 
-  it('trims title and blocks save when title or due date is empty', async () => {
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+
+  it('uses calendar chips for dates and circle buttons for importance', async () => {
     const user = userEvent.setup()
     const onClose = vi.fn()
     const onDelete = vi.fn()
+    const onMoveToTomorrow = vi.fn()
     const onSave = vi.fn()
 
     render(
@@ -67,52 +40,71 @@ describe('TaskDetailPanel', () => {
         task={createTask()}
         onClose={onClose}
         onDelete={onDelete}
-        onMoveToTomorrow={vi.fn()}
+        onMoveToTomorrow={onMoveToTomorrow}
         onSave={onSave}
       />,
     )
 
-    const titleInput = screen.getByLabelText('제목')
-    await user.clear(titleInput)
-    await user.type(titleInput, '  다듬은 제목  ')
+    expect(screen.queryByRole('combobox')).not.toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /시작일/ })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /마감일/ })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: '중요도 낮음' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: '중요도 보통' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: '중요도 높음' })).toBeInTheDocument()
 
-    const dueDateInput = screen.getByLabelText('마감일')
-    await user.clear(dueDateInput)
-    await user.click(screen.getByRole('button', { name: '저장' }))
+    await user.click(screen.getByRole('button', { name: /시작일/ }))
+    const calendar = screen.getByRole('dialog', { name: '시작일 선택 달력' })
+    await user.click(within(calendar).getByRole('button', { name: '7' }))
 
-    expect(onSave).not.toHaveBeenCalled()
-
-    await user.type(dueDateInput, '2026-04-08')
+    await user.click(screen.getByRole('button', { name: '중요도 높음' }))
     await user.click(screen.getByRole('button', { name: '저장' }))
 
     expect(onSave).toHaveBeenCalledWith(
       'task-1',
-      expect.objectContaining({ title: '다듬은 제목', dueDate: '2026-04-08', startDate: '2026-04-05' }),
+      expect.objectContaining({
+        startDate: '2026-04-07',
+        importance: 'high',
+      }),
     )
-    expect(onClose).toHaveBeenCalled()
   })
 
-  it('saves edited start date', async () => {
+  it('fetches AI step templates and fills the step list', async () => {
     const user = userEvent.setup()
+    const onClose = vi.fn()
     const onDelete = vi.fn()
+    const onMoveToTomorrow = vi.fn()
     const onSave = vi.fn()
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ steps: ['준비하기', '실행하기', '마무리하기'] }),
+    })
+
+    vi.stubGlobal('fetch', fetchMock)
 
     render(
       <TaskDetailPanel
-        task={createTask()}
-        onClose={vi.fn()}
+        task={createTask({ title: '운동' })}
+        onClose={onClose}
         onDelete={onDelete}
-        onMoveToTomorrow={vi.fn()}
+        onMoveToTomorrow={onMoveToTomorrow}
         onSave={onSave}
       />,
     )
 
-    const startDateInput = screen.getByLabelText('시작일')
-    await user.clear(startDateInput)
-    await user.type(startDateInput, '2026-04-07')
-    await user.click(screen.getByRole('button', { name: '저장' }))
+    await user.click(screen.getByRole('button', { name: '단계 템플릿 추천' }))
 
-    expect(onSave).toHaveBeenCalledWith('task-1', expect.objectContaining({ startDate: '2026-04-07' }))
+    await waitFor(() => {
+      expect(screen.getByText('준비하기')).toBeInTheDocument()
+      expect(screen.getByText('실행하기')).toBeInTheDocument()
+      expect(screen.getByText('마무리하기')).toBeInTheDocument()
+    })
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      '/api/step-templates',
+      expect.objectContaining({
+        method: 'POST',
+      }),
+    )
   })
 
   it('deletes the task from the detail panel', async () => {

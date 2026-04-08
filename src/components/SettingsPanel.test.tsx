@@ -6,24 +6,7 @@ import { createDefaultSettings } from '../types/settings'
 import { SettingsPanel } from './SettingsPanel'
 
 describe('SettingsPanel', () => {
-  it('normalizes cleared numeric inputs before saving', async () => {
-    const user = userEvent.setup()
-    const onSave = vi.fn()
-
-    render(<SettingsPanel settings={createDefaultSettings()} onClose={vi.fn()} onSave={onSave} />)
-
-    const todayThreshold = screen.getByLabelText('오늘 기준 일수')
-    await user.clear(todayThreshold)
-    await user.click(screen.getByRole('button', { name: '설정 저장' }))
-
-    expect(onSave).toHaveBeenCalledWith(
-      expect.objectContaining({
-        todayThresholdDays: 0,
-      }),
-    )
-  })
-
-  it('saves label and tone changes from the draft', async () => {
+  it('lets you edit the today label', async () => {
     const user = userEvent.setup()
     const onSave = vi.fn()
 
@@ -31,19 +14,12 @@ describe('SettingsPanel', () => {
 
     const todayLabel = screen.getByLabelText('오늘 라벨')
     await user.clear(todayLabel)
-    await user.type(todayLabel, 'Now')
-    await user.clear(screen.getByLabelText('마감 라벨'))
-    await user.type(screen.getByLabelText('마감 라벨'), '늦은 일')
-    await user.selectOptions(screen.getByRole('combobox', { name: '리스트 말투' }), 'strict')
+    await user.type(todayLabel, '오늘')
     await user.click(screen.getByRole('button', { name: '설정 저장' }))
 
     expect(onSave).toHaveBeenCalledWith(
       expect.objectContaining({
-        labels: expect.objectContaining({
-          today: 'Now',
-          late: '늦은 일',
-        }),
-        tone: 'strict',
+        todayLabel: '오늘',
       }),
     )
   })
@@ -62,5 +38,11 @@ describe('SettingsPanel', () => {
 
     expect(onClose).toHaveBeenCalledTimes(1)
     expect(onSave).not.toHaveBeenCalled()
+  })
+
+  it('keeps tone control available', () => {
+    render(<SettingsPanel settings={createDefaultSettings()} onClose={vi.fn()} onSave={vi.fn()} />)
+
+    expect(screen.getByRole('combobox', { name: '리스트 말투' })).toBeInTheDocument()
   })
 })

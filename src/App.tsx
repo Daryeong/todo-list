@@ -20,7 +20,6 @@ function App({ today = defaultToday }: { today?: string }) {
     todayCompletedTasks,
     addTask,
     updateTask,
-    completeTask,
     moveTaskToTomorrow,
     deleteTask,
     updateSettings,
@@ -46,12 +45,7 @@ function App({ today = defaultToday }: { today?: string }) {
         <section className="panel unified-panel">
           <TaskComposer defaultDate={today} onSubmit={addTask} />
           <div className="panel-divider" />
-          <TopTasks
-            onComplete={completeTask}
-            onDelete={deleteTask}
-            onOpenDetail={setSelectedTaskId}
-            tasks={openTasks}
-          />
+          <TopTasks onDelete={deleteTask} onOpenDetail={setSelectedTaskId} tasks={openTasks} />
           <div className="panel-divider" />
           <CompletedTasks tasks={todayCompletedTasks} onDelete={deleteTask} />
         </section>

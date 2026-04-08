@@ -6,12 +6,8 @@ import { createDefaultSettings, type Settings } from '../types/settings'
 import { createTask, type Task, type TaskInput } from '../types/task'
 
 const mergeSettings = (current: Settings, partial: Partial<Settings>): Settings => ({
-  ...current,
-  ...partial,
-  labels: {
-    ...current.labels,
-    ...(partial.labels ?? {}),
-  },
+  todayLabel: partial.todayLabel ?? current.todayLabel,
+  tone: partial.tone ?? current.tone,
 })
 
 export const useTodoApp = (today = toDateOnly(new Date().toISOString())) => {

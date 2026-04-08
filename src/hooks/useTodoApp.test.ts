@@ -69,10 +69,7 @@ describe('useTodoApp', () => {
           },
         ],
         settings: {
-          todayThresholdDays: 0,
-          lateThresholdDays: 0,
-          flexibleThresholdDays: 7,
-          labels: { today: '마감 임박', late: '늦은 일', flexible: '여유' },
+          todayLabel: '오늘',
           tone: 'encouraging',
         },
       }),
@@ -103,18 +100,12 @@ describe('useTodoApp', () => {
 
     act(() => {
       result.current.updateSettings({
-        flexibleThresholdDays: 10,
-        labels: {
-          today: '오늘 꼭',
-          late: '밀린 일',
-          flexible: '천천히',
-        },
+        todayLabel: '지금',
       })
     })
 
-    expect(result.current.settings.flexibleThresholdDays).toBe(10)
-    expect(result.current.settings.labels.today).toBe('오늘 꼭')
-    expect(JSON.parse(localStorage.getItem('todo-list-app') ?? '{}').settings.labels.today).toBe('오늘 꼭')
+    expect(result.current.settings.todayLabel).toBe('지금')
+    expect(JSON.parse(localStorage.getItem('todo-list-app') ?? '{}').settings.todayLabel).toBe('지금')
   })
 
   it('edits memo and status overrides', () => {
@@ -158,10 +149,7 @@ describe('useTodoApp', () => {
       JSON.stringify({
         tasks: [],
         settings: {
-          todayThresholdDays: 1,
-          lateThresholdDays: 0,
-          flexibleThresholdDays: 7,
-          labels: { today: '오늘', late: '늦음', flexible: '여유' },
+          todayLabel: '오늘',
           tone: 'plain',
         },
       }),

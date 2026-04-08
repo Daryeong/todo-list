@@ -24,6 +24,23 @@ export const loadStoredState = (): StoredAppState => {
 
     const parsed = JSON.parse(raw) as Partial<StoredAppState>
     const defaultSettings = createDefaultSettings()
+    const storedSettings = parsed.settings as Partial<Settings> & {
+      labels?: {
+        today?: string
+      }
+    }
+
+    const todayLabel =
+      typeof storedSettings?.todayLabel === 'string'
+        ? storedSettings.todayLabel
+        : typeof storedSettings?.labels?.today === 'string'
+          ? storedSettings.labels.today
+          : defaultSettings.todayLabel
+
+    const tone =
+      storedSettings?.tone && ['encouraging', 'plain', 'funny', 'strict'].includes(storedSettings.tone)
+        ? storedSettings.tone
+        : defaultSettings.tone
 
     return {
       tasks: Array.isArray(parsed.tasks)
@@ -38,11 +55,8 @@ export const loadStoredState = (): StoredAppState => {
         : [],
       settings: {
         ...defaultSettings,
-        ...(parsed.settings ?? {}),
-        labels: {
-          ...defaultSettings.labels,
-          ...(parsed.settings?.labels ?? {}),
-        },
+        todayLabel,
+        tone,
       },
     }
   } catch {
