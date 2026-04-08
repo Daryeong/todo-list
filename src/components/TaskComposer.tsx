@@ -109,10 +109,6 @@ export const TaskComposer = ({ onSubmit, defaultDate }: { onSubmit: (input: Task
   }
 
   useEffect(() => {
-    if (!showDatePicker) {
-      return
-    }
-
     const handlePointerDown = (event: MouseEvent) => {
       const calendarPopover = composerRef.current?.querySelector('.calendar-popover')
 
@@ -130,7 +126,7 @@ export const TaskComposer = ({ onSubmit, defaultDate }: { onSubmit: (input: Task
     return () => {
       window.removeEventListener('mousedown', handlePointerDown)
     }
-  }, [showDatePicker, showOptions])
+  }, [showDatePicker, showOptions, closePickers])
 
   return (
     <div className={`task-composer ${showOptions ? 'task-composer--open' : ''}`} ref={composerRef}>
