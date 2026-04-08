@@ -24,7 +24,7 @@ export const CompletedTasks = ({ tasks, onDelete }: { tasks: Task[]; onDelete: (
               <strong className="completed-title">{task.title}</strong>
             </div>
             <div className="task-card-side">
-              <span className="task-date">{formatShortKoreanDate(task.startDate)} → {formatShortKoreanDate(task.dueDate)}</span>
+              <span className="task-date">{formatShortKoreanDate(task.startDate)} ~ {formatShortKoreanDate(task.dueDate)}</span>
               <button className="tiny-delete-btn" onClick={() => onDelete(task.id)} type="button">×</button>
             </div>
           </div>

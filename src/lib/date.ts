@@ -32,5 +32,5 @@ export const formatShortKoreanDate = (value: string) =>
     ? new Intl.DateTimeFormat('ko-KR', {
         month: 'numeric',
         day: 'numeric',
-      }).format(parseDateOnly(value))
+      }).format(parseDateOnly(value)).replace(/ /g, '')
     : '-'

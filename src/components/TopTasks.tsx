@@ -41,7 +41,7 @@ export const TopTasks = ({
               {task.memo ? <p className="task-meta">{task.memo}</p> : null}
             </div>
             <div className="task-card-side" onClick={() => onOpenDetail(task.id)} role="button" tabIndex={0}>
-              <span className="task-date">{formatShortKoreanDate(task.startDate)} → {formatShortKoreanDate(task.dueDate)}</span>
+              <span className="task-date">{formatShortKoreanDate(task.startDate)} ~ {formatShortKoreanDate(task.dueDate)}</span>
               <button className="tiny-delete-btn" onClick={() => onDelete(task.id)} type="button">×</button>
             </div>
           </div>
