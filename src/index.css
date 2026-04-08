@@ -633,6 +633,7 @@ textarea:focus {
 .task-card-main {
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
   gap: 8px;
 }
@@ -692,6 +693,7 @@ textarea:focus {
 .task-card-copy {
   min-width: 0;
   flex: 1;
+  text-align: center;
 }
 
 .task-card-copy strong {
@@ -894,6 +896,7 @@ textarea:focus {
     order: 3;
     flex: 1;
     min-width: 0;
+    text-align: center;
   }
 
   .task-card-copy strong {
