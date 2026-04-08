@@ -119,6 +119,10 @@ export const TaskComposer = ({ onSubmit, defaultDate }: { onSubmit: (input: Task
       if (calendarPopover && !calendarPopover.contains(event.target as Node)) {
         closePickers()
       }
+
+      if (showOptions && !composerRef.current?.contains(event.target as Node)) {
+        setShowOptions(false)
+      }
     }
 
     window.addEventListener('mousedown', handlePointerDown)
@@ -126,7 +130,7 @@ export const TaskComposer = ({ onSubmit, defaultDate }: { onSubmit: (input: Task
     return () => {
       window.removeEventListener('mousedown', handlePointerDown)
     }
-  }, [showDatePicker])
+  }, [showDatePicker, showOptions])
 
   return (
     <div className={`task-composer ${showOptions ? 'task-composer--open' : ''}`} ref={composerRef}>
