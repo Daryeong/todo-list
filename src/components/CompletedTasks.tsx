@@ -1,34 +1,28 @@
-import { formatShortKoreanDate } from '../lib/date'
 import type { Task } from '../types/task'
+import { TaskItem } from './TaskItem'
 
-export const CompletedTasks = ({ tasks, onDelete }: { tasks: Task[]; onDelete: (taskId: string) => void }) => (
+export const CompletedTasks = ({
+  tasks,
+  today,
+  dueSoonLabel,
+  onDelete,
+}: {
+  tasks: Task[]
+  today: string
+  dueSoonLabel: string
+  onDelete: (taskId: string) => void
+}) => (
   <div>
     <div className="panel-title-row">
       <div>
         <h2>오늘 완료한 일</h2>
-        <p className="section-caption">오늘 끝낸 일들이 여기에 쌓여요.</p>
+        <p className="section-caption">오늘 끝낸 작업이 여기에 쌓입니다.</p>
       </div>
     </div>
     <div className="task-stack">
       {tasks.length === 0 ? <p>오늘 완료한 일이 아직 없어요.</p> : null}
       {tasks.map((task) => (
-        <article className="task-card task-card--completed" key={task.id}>
-          <div className="task-card-main">
-            <div className="task-card-status">
-              <span className="completed-mark" aria-hidden="true">완료</span>
-            </div>
-            <div className="task-card-importance">
-              <span className={`importance-dot-small importance-dot-small--${task.importance}`}></span>
-            </div>
-            <div className="task-card-copy">
-              <strong className="completed-title">{task.title}</strong>
-            </div>
-            <div className="task-card-side">
-              <span className="task-date">{formatShortKoreanDate(task.startDate)} ~ {formatShortKoreanDate(task.dueDate)}</span>
-              <button className="tiny-delete-btn" onClick={() => onDelete(task.id)} type="button">×</button>
-            </div>
-          </div>
-        </article>
+        <TaskItem dueSoonLabel={dueSoonLabel} key={task.id} task={task} today={today} onDelete={onDelete} completed />
       ))}
     </div>
   </div>

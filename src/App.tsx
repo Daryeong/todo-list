@@ -45,9 +45,15 @@ function App({ today = defaultToday }: { today?: string }) {
         <section className="panel unified-panel">
           <TaskComposer defaultDate={today} onSubmit={addTask} />
           <div className="panel-divider" />
-          <TopTasks onDelete={deleteTask} onOpenDetail={setSelectedTaskId} tasks={openTasks} />
+          <TopTasks
+            dueSoonLabel={settings.todayLabel}
+            onDelete={deleteTask}
+            onOpenDetail={setSelectedTaskId}
+            tasks={openTasks}
+            today={today}
+          />
           <div className="panel-divider" />
-          <CompletedTasks tasks={todayCompletedTasks} onDelete={deleteTask} />
+          <CompletedTasks dueSoonLabel={settings.todayLabel} tasks={todayCompletedTasks} today={today} onDelete={deleteTask} />
         </section>
       </div>
       {selectedTask ? (

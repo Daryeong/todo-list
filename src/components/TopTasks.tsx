@@ -1,11 +1,16 @@
 import type { Task } from '../types/task'
+import { TaskItem } from './TaskItem'
 
 export const TopTasks = ({
   tasks,
+  today,
+  dueSoonLabel,
   onOpenDetail,
   onDelete,
 }: {
   tasks: Task[]
+  today: string
+  dueSoonLabel: string
   onOpenDetail: (taskId: string) => void
   onDelete: (taskId: string) => void
 }) => (
@@ -13,35 +18,22 @@ export const TopTasks = ({
     <div className="panel-title-row">
       <div>
         <h2>할 일 목록</h2>
-        <p className="section-caption">목록에서는 제목만 보여서 더 빠르게 훑을 수 있습니다.</p>
+        <p className="section-caption">시작일, 마감일, 중요도와 마감임박 상태를 함께 볼 수 있습니다.</p>
       </div>
     </div>
 
     <div className="task-stack">
-      {tasks.length === 0 ? <p>아직 할 일이 없습니다. 새 할 일을 추가해 보세요.</p> : null}
+      {tasks.length === 0 ? <p>아직 할 일이 없어요. 오른쪽 입력창에서 새 작업을 추가해보세요.</p> : null}
 
       {tasks.map((task) => (
-        <article
-          className="task-card task-card--minimal"
+        <TaskItem
+          dueSoonLabel={dueSoonLabel}
           key={task.id}
-          onClick={() => onOpenDetail(task.id)}
-          role="button"
-          tabIndex={0}
-        >
-          <div className="task-card-minimal-row">
-            <strong>{task.title}</strong>
-            <button
-              className="tiny-delete-btn"
-              onClick={(event) => {
-                event.stopPropagation()
-                onDelete(task.id)
-              }}
-              type="button"
-            >
-              삭제
-            </button>
-          </div>
-        </article>
+          task={task}
+          today={today}
+          onDelete={onDelete}
+          onOpenDetail={onOpenDetail}
+        />
       ))}
     </div>
   </div>

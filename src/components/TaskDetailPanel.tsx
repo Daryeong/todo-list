@@ -12,6 +12,10 @@ const importanceOptions: { value: Importance; label: string; dot: string }[] = [
 ]
 
 type DateTarget = 'start' | 'due'
+type CalendarPosition = {
+  top: number
+  left: number
+}
 
 const parseDateOnly = (value: string) => new Date(`${value}T00:00:00`)
 
@@ -73,6 +77,7 @@ export const TaskDetailPanel = ({
   const [showDatePicker, setShowDatePicker] = useState(false)
   const [dateTarget, setDateTarget] = useState<DateTarget>('due')
   const [calendarCursor, setCalendarCursor] = useState(task.dueDate || task.startDate)
+  const [calendarPosition, setCalendarPosition] = useState<CalendarPosition | null>(null)
   const [isSuggesting, setIsSuggesting] = useState(false)
   const [suggestionError, setSuggestionError] = useState<string | null>(null)
 
@@ -93,6 +98,7 @@ export const TaskDetailPanel = ({
       }
 
       setShowDatePicker(false)
+      setCalendarPosition(null)
     }
 
     window.addEventListener('mousedown', handlePointerDown)
@@ -122,10 +128,22 @@ export const TaskDetailPanel = ({
     onClose()
   }
 
-  const openDatePickerFor = (target: DateTarget) => {
+  const openDatePickerFor = (target: DateTarget, trigger: HTMLButtonElement) => {
+    const rect = trigger.getBoundingClientRect()
+    const popoverWidth = 280
+    const popoverHeight = 320
+    const viewportPadding = 16
+    const left = Math.min(
+      Math.max(viewportPadding, rect.left),
+      Math.max(viewportPadding, window.innerWidth - popoverWidth - viewportPadding),
+    )
+    const preferredTop = rect.bottom + 8
+    const top = Math.min(preferredTop, Math.max(viewportPadding, window.innerHeight - popoverHeight - viewportPadding))
+
     setDateTarget(target)
     setShowDatePicker(true)
     setCalendarCursor(target === 'due' ? draft.dueDate || draft.startDate : draft.startDate || draft.dueDate)
+    setCalendarPosition({ top, left })
   }
 
   const moveCalendarMonth = (offset: number) => {
@@ -141,6 +159,7 @@ export const TaskDetailPanel = ({
       setDraft((current) => ({ ...current, startDate: value }))
     }
     setShowDatePicker(false)
+    setCalendarPosition(null)
   }
 
   const runStepSuggestion = async () => {
@@ -164,7 +183,7 @@ export const TaskDetailPanel = ({
         steps: steps.length > 0 ? steps : getSuggestedSteps(current.title, current.memo),
       }))
     } catch {
-      setSuggestionError('단계 템플릿을 가져오지 못했습니다.')
+      setSuggestionError('단계 추천을 불러오지 못했어요. 기본 추천으로 채워둘게요.')
       setDraft((current) => ({ ...current, steps: getSuggestedSteps(current.title, current.memo) }))
     } finally {
       setIsSuggesting(false)
@@ -185,6 +204,7 @@ export const TaskDetailPanel = ({
           <label>
             <span>할 일</span>
             <input
+              aria-label="할 일"
               value={draft.title}
               onChange={(event) => setDraft((current) => ({ ...current, title: event.target.value }))}
             />
@@ -194,13 +214,10 @@ export const TaskDetailPanel = ({
             <span>시작일</span>
             <button
               aria-label={getDateLabel('start', draft.startDate)}
-              className="option-chip option-chip--date detail-date-button"
-              onClick={() => openDatePickerFor('start')}
+              className="option-chip option-chip--date detail-date-button detail-date-button--plain"
+              onClick={(event) => openDatePickerFor('start', event.currentTarget)}
               type="button"
             >
-              <span className="date-chip-icon" aria-hidden="true">
-                ◔
-              </span>
               <span className="date-chip-text">{draft.startDate ? formatShortKoreanDate(draft.startDate) : '날짜 선택'}</span>
             </button>
           </div>
@@ -210,11 +227,11 @@ export const TaskDetailPanel = ({
             <button
               aria-label={getDateLabel('due', draft.dueDate)}
               className="option-chip option-chip--date detail-date-button"
-              onClick={() => openDatePickerFor('due')}
+              onClick={(event) => openDatePickerFor('due', event.currentTarget)}
               type="button"
             >
               <span className="date-chip-icon" aria-hidden="true">
-                ◔
+                ○
               </span>
               <span className="date-chip-text">{draft.dueDate ? formatShortKoreanDate(draft.dueDate) : '날짜 선택'}</span>
             </button>
@@ -271,31 +288,29 @@ export const TaskDetailPanel = ({
 
         {showDatePicker ? (
           <div
-            aria-label={dateTarget === 'start' ? '시작일 선택 달력' : '마감일 선택 달력'}
+            aria-label={dateTarget === 'start' ? '시작일 달력' : '마감일 달력'}
             className="calendar-popover"
             ref={popoverRef}
             role="dialog"
+            style={
+              calendarPosition
+                ? {
+                    left: `${calendarPosition.left}px`,
+                    top: `${calendarPosition.top}px`,
+                  }
+                : undefined
+            }
           >
             <div className="calendar-header">
-              <button
-                aria-label="이전 달"
-                className="calendar-nav"
-                onClick={() => moveCalendarMonth(-1)}
-                type="button"
-              >
+              <button aria-label="이전 달" className="calendar-nav" onClick={() => moveCalendarMonth(-1)} type="button">
                 ‹
               </button>
               <div className="calendar-title-group">
-                <button
-                  aria-label={`${calendarMonth.year}년 선택`}
-                  className="calendar-title-button"
-                  onClick={() => {}}
-                  type="button"
-                >
+                <button aria-label={`${calendarMonth.year}년`} className="calendar-title-button" onClick={() => {}} type="button">
                   {calendarMonth.year}년
                 </button>
                 <button
-                  aria-label={`${calendarMonth.month + 1}월 선택`}
+                  aria-label={`${calendarMonth.month + 1}월`}
                   className="calendar-title-button"
                   onClick={() => {}}
                   type="button"
@@ -303,12 +318,7 @@ export const TaskDetailPanel = ({
                   {calendarMonth.month + 1}월
                 </button>
               </div>
-              <button
-                aria-label="다음 달"
-                className="calendar-nav"
-                onClick={() => moveCalendarMonth(1)}
-                type="button"
-              >
+              <button aria-label="다음 달" className="calendar-nav" onClick={() => moveCalendarMonth(1)} type="button">
                 ›
               </button>
             </div>

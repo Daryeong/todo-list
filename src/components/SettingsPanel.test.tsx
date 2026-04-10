@@ -6,20 +6,20 @@ import { createDefaultSettings } from '../types/settings'
 import { SettingsPanel } from './SettingsPanel'
 
 describe('SettingsPanel', () => {
-  it('lets you edit the today label', async () => {
+  it('lets you edit the label', async () => {
     const user = userEvent.setup()
     const onSave = vi.fn()
 
     render(<SettingsPanel settings={createDefaultSettings()} onClose={vi.fn()} onSave={onSave} />)
 
-    const todayLabel = screen.getByLabelText('오늘 라벨')
-    await user.clear(todayLabel)
-    await user.type(todayLabel, '오늘')
+    const labelInput = screen.getByRole('textbox', { name: '라벨 이름' })
+    await user.clear(labelInput)
+    await user.type(labelInput, '오늘 마감')
     await user.click(screen.getByRole('button', { name: '설정 저장' }))
 
     expect(onSave).toHaveBeenCalledWith(
       expect.objectContaining({
-        todayLabel: '오늘',
+        todayLabel: '오늘 마감',
       }),
     )
   })
@@ -31,9 +31,9 @@ describe('SettingsPanel', () => {
 
     render(<SettingsPanel settings={createDefaultSettings()} onClose={onClose} onSave={onSave} />)
 
-    const todayLabel = screen.getByLabelText('오늘 라벨')
-    await user.clear(todayLabel)
-    await user.type(todayLabel, 'Later')
+    const labelInput = screen.getByRole('textbox', { name: '라벨 이름' })
+    await user.clear(labelInput)
+    await user.type(labelInput, 'Later')
     await user.click(screen.getByRole('button', { name: '닫기' }))
 
     expect(onClose).toHaveBeenCalledTimes(1)

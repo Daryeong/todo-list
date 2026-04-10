@@ -33,7 +33,7 @@ export const SettingsPanel = ({
         <div className="panel-title-row">
           <div>
             <h2 id="settings-panel-title">설정</h2>
-            <p className="section-caption">현재 화면에 보이는 라벨과 말투를 바꿉니다.</p>
+            <p className="section-caption">홈 화면 배지 문구와 리스트 말투를 조정합니다.</p>
           </div>
           <button className="ghost-button" onClick={onClose} type="button">
             닫기
@@ -43,12 +43,12 @@ export const SettingsPanel = ({
         <div className="settings-content">
           <section className="settings-section" aria-labelledby="settings-label-title">
             <div>
-              <h3 id="settings-label-title">라벨 이름</h3>
-              <p className="section-caption">메인 화면에 표시되는 상태 라벨을 바로 수정합니다.</p>
+              <h3 id="settings-label-title">라벨 이름 설정</h3>
+              <p className="section-caption">홈 화면의 마감 배지에 표시되는 문구를 수정합니다.</p>
             </div>
             <label className="setting-item">
-              <span>오늘 라벨</span>
-              <input aria-label="오늘 라벨" value={draft.todayLabel} onChange={updateTodayLabel} />
+              <span>라벨 이름</span>
+              <input aria-label="라벨 이름" value={draft.todayLabel} onChange={updateTodayLabel} />
             </label>
             <p className="preview-copy">
               미리보기: <span>{previewText(draft.todayLabel, '오늘 상태에 표시됩니다')}</span>

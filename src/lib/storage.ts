@@ -46,10 +46,20 @@ export const loadStoredState = (): StoredAppState => {
       tasks: Array.isArray(parsed.tasks)
         ? (parsed.tasks.map((task) => {
             const candidate = task as Partial<Task>
+            const startDate =
+              candidate.startDate ?? candidate.dueDate ?? toDateOnly(candidate.createdAt ?? new Date().toISOString())
+            const dueDate = candidate.dueDate ?? startDate
 
             return {
               ...candidate,
-              startDate: candidate.startDate ?? candidate.dueDate ?? toDateOnly(candidate.createdAt ?? new Date().toISOString()),
+              startDate,
+              dueDate,
+              importance: candidate.importance ?? 'medium',
+              memo: candidate.memo ?? '',
+              steps: Array.isArray(candidate.steps) ? candidate.steps : [],
+              manualStatuses: candidate.manualStatuses ?? {},
+              completedAt: candidate.completedAt ?? null,
+              createdAt: candidate.createdAt ?? `${startDate}T09:00:00.000Z`,
             }
           }) as Task[])
         : [],
