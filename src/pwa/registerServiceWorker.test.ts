@@ -30,7 +30,7 @@ describe('registerServiceWorker', () => {
 
     await expect(registerServiceWorker({ isEnabled: true })).resolves.toBeUndefined()
 
-    expect(register).toHaveBeenCalledWith('/sw.js')
+    expect(register).toHaveBeenCalledWith('/todo-list/sw.js')
   })
 
   it('skips registration when disabled', async () => {

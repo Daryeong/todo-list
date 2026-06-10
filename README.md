@@ -36,6 +36,12 @@ npm run build
 
 PWA service worker registration is enabled only in production builds. For install or offline checks, use a deployed HTTPS URL or a production preview.
 
+## Deploy
+
+```bash
+npm run deploy
+```
+
 ## iPhone Install
 
 See the [iPhone PWA install guide](./docs/iphone-pwa-install.md).

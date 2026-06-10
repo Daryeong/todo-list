@@ -18,7 +18,7 @@ function getNavigatorObject(navigatorObject?: Navigator) {
 
 export async function registerServiceWorker({
   isEnabled = import.meta.env.PROD,
-  serviceWorkerUrl = '/sw.js',
+  serviceWorkerUrl = `${import.meta.env.BASE_URL}sw.js`,
   navigatorObject,
 }: RegisterServiceWorkerOptions = {}) {
   const resolvedNavigator = getNavigatorObject(navigatorObject)
